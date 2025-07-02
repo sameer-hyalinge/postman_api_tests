@@ -1,0 +1,41 @@
+name: Run Postman API Tests
+
+# When to run this workflow
+on:
+  push:
+    branches: [main]         # Run when code is pushed to main branch
+  workflow_dispatch:         # Also allow manual run via GitHub UI
+
+jobs:
+  test:
+    runs-on: ubuntu-latest   # Use GitHub’s Linux virtual machine
+
+    steps:
+      # Step 1: Checkout your repo code
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      # Step 2: Install Node.js (needed to run Newman)
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Install Newman and the HTML reporter
+      - name: Install Newman and Reporter
+        run: npm install -g newman newman-reporter-htmlextra
+
+      # Step 4: Run Postman Tests
+      - name: Run API Tests
+        run: |
+          newman run latest_collection.json \
+            -e postman_env.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export reports/report.html
+
+      # Step 5: Upload test report as downloadable artifact
+      - name: Upload HTML Report as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: postman-report
+          path: reports/report.html
