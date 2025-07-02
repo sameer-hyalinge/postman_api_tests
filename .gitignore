@@ -1,0 +1,5 @@
+# Ignore auto-downloaded collection
+latest_collection.json
+
+# Ignore generated reports
+reports/

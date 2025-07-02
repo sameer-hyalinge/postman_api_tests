@@ -1,0 +1,15 @@
+{
+	"id": "3b0fa09a-d162-4a85-a206-97d939f5898e",
+	"name": "New Environment",
+	"values": [
+		{
+			"key": "userId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-07-02T11:02:40.678Z",
+	"_postman_exported_using": "Postman/11.52.3"
+}
